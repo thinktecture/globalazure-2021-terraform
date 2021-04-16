@@ -2,6 +2,14 @@ provider "azurerm" {
   features {}
 }
 
+locals {
+  default_tags = {
+    "com.globalazure.session"     = "Terraform"
+    "com.globalazure.environment" = "development"
+  }
+
+  tags = merge(local.default_tags, var.custom_tags)
+}
 terraform {
   required_providers {
     azurerm = {
